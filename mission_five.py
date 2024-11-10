@@ -14,8 +14,9 @@ from robot_18300 import robot_18300
 
 def mission_five(r):
     print("Running Mission 5")
-    # Mission Name
-    # Authors
-    
+    # Mission Name push da boat
+    # Authors Jackson
+    r.gyro_drive_straight_distance(200, 900)
+    r.robot.straight(-1000)
 
     

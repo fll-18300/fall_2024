@@ -88,74 +88,31 @@ class robot_18300:
             wait(4000)
             self.ev3.screen.clear()
             sys.exit()
-        # keep_trying = 1
-        # retry_count = 0
-        # while keep_trying == 1:
-        #     try:
-        #         self.gyro_sensor = GyroSensor(Port.S1)
-        #         keep_trying = 0
-        #         print("Gyro Init Port 1 Good!")
-        #     except:
-        #         self.ev3.screen.clear() 
-        #         self.ev3.screen.draw_text(0,44,"Gyro Init Port 1 Bad.")
-        #         self.ev3.screen.draw_text(0,64,"Retry Attempt # " + str(retry_count + 1))
-        #         print("Gyro Init Port 1 Bad. Retry...")
-        #         try:
-        #             self.analog_sensor = AnalogSensor(Port.S1)
-        #             wait(500)
-        #             self.gyro_sensor = GyroSensor(Port.S1)
-        #             self.ev3.screen.draw_text(0, 22, "Gyro Init Good!")
-        #             print("Gyro Init Port 1 Good!")
-        #             keep_trying = 0
-        #         except:
-        #             if retry_count == 1:
-        #                 print("Gyro Init Port 1 Bad. Retry limit reached.")
-        #                 self.ev3.screen.clear()
-        #                 self.ev3.light.off()
-        #                 self.ev3.light.on(Color.RED)
-        #                 self.ev3.screen.draw_text(0,22,"STARTUP ERROR")
-        #                 self.ev3.screen.draw_text(0,44,"CHECK PORT 1")
-        #                 self.ev3.screen.draw_text(0,66,"Retry limit reached...")
-        #                 self.ev3.speaker.beep(frequency=2000, duration=1000)
-        #                 wait(4000)
-        #                 self.ev3.screen.clear()
-        #                 sys.exit()    
-        #             print("Gyro Init Port 1 Bad, Retry again...")
-        #             retry_count = retry_count + 1
         keep_trying = 1
-        retry_count = 0
         while keep_trying == 1:
             try:
-                self.gyro_sensor = GyroSensor(Port.S4, direction=Direction.CLOCKWISE)
+                print("Instantiating gyro_sensor")
+                self.gyro_sensor = GyroSensor(Port.S1)
                 keep_trying = 0
-                print("Gyro Init Port 4 Good!")
-            except:
-                self.ev3.screen.clear() 
-                self.ev3.screen.draw_text(0,44,"Gyro Init Port 4 Bad.")
-                self.ev3.screen.draw_text(0,64,"Retry Attempt # " + str(retry_count + 1))
-                print("Gyro Init Port 4 Bad. Retry...")
+            except: 
+                keep_trying = 1
+                #self.ev3.screen.clear()
+                #self.ev3.light.off()
+                #self.ev3.light.on(Color.RED)
+                self.ev3.screen.draw_text(0,40,"RETRY")
+                print("Retry...")
                 try:
-                    self.analog_sensor = AnalogSensor(Port.S4)
-                    wait(500)
-                    self.gyro_sensor = GyroSensor(Port.S4, direction=Direction.CLOCKWISE)
-                    self.ev3.screen.draw_text(0, 22, "Gyro Init Good!")
-                    print("Gyro Init Port 4 Good!")
+                    # Attempt to soft-reset the port.
+                    self.analog_sensor = AnalogSensor(Port.S1)
+                    wait(4000)
+                    self.gyro_sensor = GyroSensor(Port.S1)
+                    wait(4000)
                     keep_trying = 0
+                    print("Worked, exit")
                 except:
-                    if retry_count == 1:
-                        print("Gyro Init Port 4 Bad. Retry limit reached.")
-                        self.ev3.screen.clear()
-                        self.ev3.light.off()
-                        self.ev3.light.on(Color.RED)
-                        self.ev3.screen.draw_text(0,22,"STARTUP ERROR")
-                        self.ev3.screen.draw_text(0,44,"CHECK PORT 4")
-                        self.ev3.screen.draw_text(0,66,"Retry limit reached...")
-                        self.ev3.speaker.beep(frequency=2000, duration=1000)
-                        wait(4000)
-                        self.ev3.screen.clear()
-                        sys.exit()    
-                    print("Gyro Init Port 4 Bad, Retry again...")
-                    retry_count = retry_count + 1
+                    print("Didn't work, try again...")
+                    keep_trying = 1
+    
         try:
             self.robot = DriveBase(self.left_drive_motor, self.right_drive_motor, wheel_diameter=88, axle_track=115)
             self.robot.settings(straight_speed=400, straight_acceleration=300, turn_rate=200, turn_acceleration=123)
@@ -208,174 +165,63 @@ class robot_18300:
     
     # Reset The Gyro
     def calibrate_gyro(self, port_number):
-        self.ev3.screen.set_font(Font(size=20))
-        retry_calibration = 1
-        retry_gyro_reset = 1
-        retry_count = 0
-        while retry_calibration == 1:
-            self.ev3.screen.draw_text(0, 0, "Calibrating The Gyro...")
-            self.ev3.screen.draw_text(0, 22, "Do Not Move Robot")
+        retry = 1
+        while retry == 1:
+            print("calibrating the Gyro")
+            self.ev3.screen.draw_text(0, 0, "Reset Gyro")
+            self.ev3.screen.draw_text(0, 22, "DO NOT MOVE!")
             if port_number == 1:
-                while retry_gyro_reset == 1:
+                keep_trying = 1
+                while keep_trying == 1:
                     try:
-                        self.analog_sensor = AnalogSensor(Port.S1)
-                        wait(500)
                         self.gyro_sensor = GyroSensor(Port.S1)
-                        wait(500)
-                        retry_gyro_reset = 0
-                        print("Gyro 1 Reset Good!")
-                        self.ev3.screen.draw_text(0, 44, "Gyro 1 Reset Good!")
+                        keep_trying = 0
                     except: 
-                        self.ev3.screen.draw_text(0,66,"Gyro 1 Reset Bad, Retrying")
-                        print("Gyro 1 Reset Failed... Retry...")
+                        self.ev3.screen.draw_text(0,40,"RETRY")
+                        print("Retry...")
                         try:
+                            # Attempt to soft-reset the port.
                             self.analog_sensor = AnalogSensor(Port.S1)
-                            wait(500)
+                            wait(4000)
                             self.gyro_sensor = GyroSensor(Port.S1)
-                            wait(500)
-                            print("Gyro 1 Reset Good!")
-                            retry_gyro_reset = 0
+                            wait(4000)
+                            print("Setting keep_trying to 0")
+                            keep_trying = 0
                         except:
-                            if retry_count == 1:
-                                print("Gyro Cal Port 1 Bad. Retry limit reached.")
-                                self.ev3.screen.clear()
-                                self.ev3.light.off()
-                                self.ev3.light.on(Color.RED)
-                                self.ev3.screen.draw_text(0,22,"GYRO CAL ERROR")
-                                self.ev3.screen.draw_text(0,44,"CHECK PORT 1")
-                                self.ev3.screen.draw_text(0,66,"Retry limit reached...")
-                                self.ev3.speaker.beep(frequency=2000, duration=1000)
-                                wait(4000)
-                                self.ev3.screen.clear()
-                                sys.exit()    
-                            retry_count = retry_count + 1
-                            print("Gyro 1 Reset Failed, Retry again...")
-            if port_number == 2:
-                while retry_gyro_reset == 1:
-                    try:
-                        self.analog_sensor = AnalogSensor(Port.S2)
-                        wait(500)
-                        self.gyro_sensor = GyroSensor(Port.S2)
-                        wait(500)
-                        retry_gyro_reset = 0
-                        print("Gyro 2 Reset Good!")
-                        self.ev3.screen.draw_text(0, 44, "Gyro 2 Reset Good!")
-                    except: 
-                        self.ev3.screen.draw_text(0,66,"Gyro 2 Reset Bad, Retrying")
-                        print("Gyro 2 Reset Failed... Retry...")
-                        try:
-                            self.analog_sensor = AnalogSensor(Port.S2)
-                            wait(500)
-                            self.gyro_sensor = GyroSensor(Port.S2)
-                            wait(500)
-                            print("Gyro 2 Reset Good!")
-                            retry_gyro_reset = 0
-                        except:
-                            if retry_count == 1:
-                                print("Gyro Cal Port 2 Bad. Retry limit reached.")
-                                self.ev3.screen.clear()
-                                self.ev3.light.off()
-                                self.ev3.light.on(Color.RED)
-                                self.ev3.screen.draw_text(0,22,"GYRO CAL ERROR")
-                                self.ev3.screen.draw_text(0,44,"CHECK PORT 2")
-                                self.ev3.screen.draw_text(0,66,"Retry limit reached...")
-                                self.ev3.speaker.beep(frequency=2000, duration=1000)
-                                wait(4000)
-                                self.ev3.screen.clear()
-                                sys.exit()    
-                            retry_count = retry_count + 1
-                            print("Gyro 2 Reset Failed, Retry again...")
-            if port_number == 3:
-                while retry_gyro_reset == 1:
-                    try:
-                        self.analog_sensor = AnalogSensor(Port.S3)
-                        wait(500)
-                        self.gyro_sensor = GyroSensor(Port.S3)
-                        wait(500)
-                        retry_gyro_reset = 0
-                        print("Gyro 3 Reset Good!")
-                        self.ev3.screen.draw_text(0, 44, "Gyro 3 Reset Good!")
-                    except: 
-                        self.ev3.screen.draw_text(0,66,"Gyro 3 Reset Bad, Retrying")
-                        print("Gyro 3 Reset Failed... Retry...")
-                        try:
-                            self.analog_sensor = AnalogSensor(Port.S3)
-                            wait(500)
-                            self.gyro_sensor = GyroSensor(Port.S3)
-                            wait(500)
-                            print("Gyro 3 Reset Good!")
-                            retry_gyro_reset = 0
-                        except:
-                            if retry_count == 1:
-                                print("Gyro Cal Port 3 Bad. Retry limit reached.")
-                                self.ev3.screen.clear()
-                                self.ev3.light.off()
-                                self.ev3.light.on(Color.RED)
-                                self.ev3.screen.draw_text(0,22,"GYRO CAL ERROR")
-                                self.ev3.screen.draw_text(0,44,"CHECK PORT 3")
-                                self.ev3.screen.draw_text(0,66,"Retry limit reached...")
-                                self.ev3.speaker.beep(frequency=2000, duration=1000)
-                                wait(4000)
-                                self.ev3.screen.clear()
-                                sys.exit()    
-                            retry_count = retry_count + 1
-                            print("Gyro 3 Reset Failed, Retry again...")
+                            print("Didn't work, retry again...")
+            elif port_number == 2:
+                analog_sensor = AnalogSensor(Port.S2)
+                wait(1000)
+                gyro_sensor = GyroSensor(Port.S2)
+                wait(1000)
+            elif port_number == 3:
+                analog_sensor = AnalogSensor(Port.S3)
+                wait(1000)
+                gyro_sensor = GyroSensor(Port.S3)
+                wait(1000)
             else:
-                while retry_gyro_reset == 1:
-                    try:
-                        self.analog_sensor = AnalogSensor(Port.S4)
-                        wait(500)
-                        self.gyro_sensor = GyroSensor(Port.S4, direction=Direction.CLOCKWISE)
-                        wait(500)
-                        retry_gyro_reset = 0
-                        print("Gyro 4 Reset Good!")
-                        self.ev3.screen.draw_text(0, 44, "Gyro 4 Reset Good!")
-                    except: 
-                        self.ev3.screen.draw_text(0,66,"Gyro 4 Reset Bad, Retrying")
-                        print("Gyro 4 Reset Failed... Retry...")
-                        try:
-                            self.analog_sensor = AnalogSensor(Port.S4)
-                            wait(500)
-                            self.gyro_sensor = GyroSensor(Port.S4, direction=Direction.CLOCKWISE)
-                            wait(500)
-                            print("Gyro 4 Reset Good!")
-                            retry_gyro_reset = 0
-                        except:
-                            if retry_count == 1:
-                                print("Gyro Cal Port 4 Bad. Retry limit reached.")
-                                self.ev3.screen.clear()
-                                self.ev3.light.off()
-                                self.ev3.light.on(Color.RED)
-                                self.ev3.screen.draw_text(0,22,"GYRO CAL ERROR")
-                                self.ev3.screen.draw_text(0,44,"CHECK PORT 4")
-                                self.ev3.screen.draw_text(0,66,"Retry limit reached...")
-                                self.ev3.speaker.beep(frequency=2000, duration=1000)
-                                wait(4000)
-                                self.ev3.screen.clear()
-                                sys.exit()    
-                            retry_count = retry_count + 1
-                            print("Gyro 4 Reset Failed, Retry again...")
+                analog_sensor = AnalogSensor(Port.S4)
+                wait(1000)
+                gyro_sensor = GyroSensor(Port.S4)
+                wait(1000)
             i = 0
             while i <= 10:
                 self.ev3.screen.clear()
-                self.ev3.screen.draw_text(0, 0, "Checking Gyro For Drift")
+                self.ev3.screen.draw_text(0, 0, "RESET GYRO")
                 self.ev3.screen.draw_text(0, 22, "DO NOT MOVE!")
                 self.ev3.screen.draw_text(0, 44, "Gyro= " + str(self.gyro_sensor.angle()))
                 wait(100)
                 self.ev3.screen.clear()
                 i = i + 1
             if self.gyro_sensor.angle() == 0:
-                retry_calibration = 0
+                retry = 0
                 self.ev3.screen.clear()
-                self.ev3.screen.draw_text(0, 22, "Gyro")
+                self.ev3.screen.draw_text(0, 44, "Gyro")
                 self.ev3.screen.draw_text(0, 44, "Calibration")
-                self.ev3.screen.draw_text(0, 84, "Complete!")
-                wait(200)
+                self.ev3.screen.draw_text(0, 84, "Complete")
+                wait(500)
                 self.ev3.screen.clear()
-            else:
-                print("Gyro Drift Detected, resetting the Gyro.")                                    
-        self.ev3.screen.set_font(Font(size=30, bold=True))
-
+    
     # gyro tank turn
     def gyro_tank_turn(self,speed, angle):
         ''' Tank turn using the gyro
@@ -483,3 +329,4 @@ class robot_18300:
             # the correction needed to keep going straight.
             self.robot.drive(speed,turn) 
         self.robot.stop()               
+

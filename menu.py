@@ -26,8 +26,8 @@ def displayMENU(r,menu):
     else:
         r.ev3.screen.draw_text(70, 0, "M5")
         r.ev3.screen.draw_text(135, 50, "M6")
-        r.ev3.screen.draw_text(70, 100, "M7")
-        r.ev3.screen.draw_text(0, 50, "M8")
+        r.ev3.screen.draw_text(70, 100, "TM")
+        r.ev3.screen.draw_text(0, 50, "GY")
         r.ev3.screen.draw_text(70, 50, "SW")
 
 # Cleanup after a mission
