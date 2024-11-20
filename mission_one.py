@@ -15,7 +15,7 @@ from robot_18300 import robot_18300
 def mission_one(r):
     print("Running Mission 1")
     # Mission Name
-    # Authors: Kyle Mortimer
+    # Authors: Kyle Mortimer 
 
     r.gyro_drive_straight_distance(200,325)
     r.gyro_tank_turn(200,30)
