@@ -25,12 +25,13 @@ def mission_six(r):
     # squid part
     r.robot.turn(55)
     r.robot.straight(-90)
+    #CRASH
     r.robot.turn(85)
     r.robot.straight(-100)
     r.robot.straight(-400)
-    # removing the plant !!!!!!!
+    # removing the plant
     r.robot.straight(50)
-    r.robot.turn(i4-55)
+    r.robot.turn(-55)
     r.robot.straight(260)
     r.right_attachment_motor.run_time(-11,2500, then=Stop.COAST, wait=False)
     r.turn(55)

@@ -17,6 +17,8 @@ def mission_five(r):
     # Mission Name push da boat
     # Authors Jackson
     r.gyro_drive_straight_distance(200, 900)
-    r.robot.straight(-1000)
+    r.robot.straight(-83)
+    r.left_attachment_motor.run_time(100,1000, then=Stop.HOLD, wait=True)    
+    r.left_attachment_motor.stop()
 
     

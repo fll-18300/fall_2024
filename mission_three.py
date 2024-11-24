@@ -16,14 +16,9 @@ def mission_three(r):
     print("Running Mission 3")
     # Mission Name Sharks forever!
     # Authors Me and Me
-    r.left_attachment_motor.run_time(-100,2500, then=Stop.HOLD, wait=False)    
-    r.right_attachment_motor.run_time(100,2500, then=Stop.HOLD, wait=True)
     r.gyro_drive_straight_distance(200,120)
     r.gyro_tank_turn(125,25)
     r.gyro_drive_straight_distance(225,293)
-    #raise the bar
-    r.left_attachment_motor.run_time(150,2500, then=Stop.HOLD, wait=False)    
-    r.right_attachment_motor.run_time(-150 ,2500, then=Stop.HOLD, wait=True)
     #face the shipwerck
     r.gyro_tank_turn(125,56) 
     #lower the bar
@@ -36,29 +31,27 @@ def mission_three(r):
     r.gyro_drive_straight_distance(81,180)
     #back away from the shipwreck
     r.gyro_drive_straight_distance(-200,50)
+    r.left_attachment_motor.stop()
+    r.right_attachment_motor.stop()
     #raise the bar
     r.left_attachment_motor.run_time(100,2500, then=Stop.HOLD, wait=False)    
-    r.right_attachment_motor.run_time(-100,2500, then=Stop.HOLD, wait=True)\
-    #turn twards coral thing 
+    r.right_attachment_motor.run_time(-100,2500, then=Stop.HOLD, wait=True)
+    #turn twards shark but not directley to it
     r.gyro_tank_turn(200,-77)
-    r.gyro_drive_straight_distance(179,190)
+    r.gyro_drive_straight_distance(209,217)
+    #turn twards the shark
+    r.gyro_tank_turn(120,-38)
     r.left_attachment_motor.run_time(-150,3500, then=Stop.HOLD, wait=False)    
     r.right_attachment_motor.run_time(150,3500, then=Stop.HOLD, wait=False)
-    wait(1000)
-    #back away from coral thing
-    r.gyro_drive_straight_distance(-179,90)
-    r.gyro_tank_turn(200,-16)
-    r.gyro_drive_straight_distance(167,159)
-    #turn twards the shark
-    r.gyro_tank_turn(120,-29)
     r.gyro_drive_straight_distance(99,89)
-    r.gyro_drive_straight_distance(-99,249)
+    r.gyro_drive_straight_distance(-99,271)
     #turn twards the other coral thing
     r.robot.drive(100,-35 )
     wait(1500)
     r.robot.stop()
     r.gyro_drive_straight_distance(167,-100)
     r.gyro_tank_turn(126,91)
-    r.gyro_drive_straight_distance(167,232)
+    #drive back to hame
+    r.gyro_drive_straight_distance(-167,232)
     r.left_attachment_motor.stop()
     r.right_attachment_motor.stop()

@@ -49,29 +49,28 @@ def mission_four(r):
     #r.robot.straight(172)
     r.gyro_drive_straight_distance(200,172)
     #robot flicks the mission over to complete it
-    #r.right_attachment_motor.run_time(-1560,700, then=Stop.COAST, wait=True)
-
-
-    
-    #wait(100)
-    #r.gyro_tank_turn(539,85)
-    #r.right_attachment_motor.run_time(-527,1000, then=Stop.COAST, wait=True)
-    #r.robot.straight(-528)
-    #r.robot.stop()
-    #r.left_attachment_motor.run_time(500,500, then=Stop.COAST, wait=False)
-    #r.right_attachment_motor.run_time(-500,500, then=Stop.COAST, wait=False)
-    #r.robot.straight(287)
-    #r.right_attachment_motor.run_time(527,1000, then=Stop.COAST, wait=False)
-    #r.robot.stop
-    #wait(500)
-    #r.left_attachment_motor.run_time(1000,500, then=Stop.COAST, wait=False)
-    #Friday stuff \/
-    #r.robot.straight(-53)
-    #r.gyro_tank_turn(502,-20)
-    #r.robot.straight(269)
-    #r.gyro_tank_turn(502,-4)
-    #r.robot.straight(212)
-    #r.gyro_tank_turn(501,-25)
+    r.right_attachment_motor.run_time(-1560,700, then=Stop.COAST, wait=True)
+    wait(100)
+    r.gyro_drive_straight_time(230,-123)
+    wait(100)
+    r.gyro_tank_turn(539,85)
+    r.right_attachment_motor.run_time(-527,1000, then=Stop.COAST, wait=True)
+    r.robot.straight(-528)
+    r.robot.stop()
+    r.left_attachment_motor.run_time(500,500, then=Stop.COAST, wait=False)
+    r.right_attachment_motor.run_time(-500,500, then=Stop.COAST, wait=False)
+    r.robot.straight(197)
+    r.right_attachment_motor.run_time(527,1000, then=Stop.COAST, wait=False)
+    r.robot.stop
+    wait(500)
+    r.left_attachment_motor.run_time(1000,500, then=Stop.COAST, wait=False)
+    #Friday stuff 
+    r.robot.straight(-53)
+    r.gyro_tank_turn(502,-8)
+    r.robot.straight(269)
+    r.gyro_tank_turn(502,-4)
+    r.robot.straight(212)
+    r.gyro_tank_turn(501,-25)
     #hehehe >:) 
 
     #Mission before adding the new wacky thang \/ 
