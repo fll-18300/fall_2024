@@ -16,7 +16,7 @@ def mission_six(r):
     print("Running Mission 6")
     # Mission Name
     # Authors Madeleine, Katherine
-    r.robot.straight(375)
+    r.robot.straight(353)
     r.robot.turn(13)
     wait(1000)
     r.robot.straight(70)
@@ -34,4 +34,4 @@ def mission_six(r):
     r.robot.turn(-55)
     r.robot.straight(260)
     r.right_attachment_motor.run_time(-11,2500, then=Stop.COAST, wait=False)
-    r.turn(55)
+    r.robot.turn(55)

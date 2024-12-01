@@ -16,7 +16,7 @@ def mission_four(r):
     print("Running Mission 4")
     # Mission name: Crabby_CRABS >{*-*}<
     # Authors: Lydia 
-    r.left_attachment_motor.run_time(-21,2000, then=Stop.COAST, wait=False)
+    r.left_attachment_motor.run_time(-121,2000, then=Stop.COAST, wait=False)
     r.robot.straight(359)
     #robot goes up to the crab mission
     r.left_attachment_motor.stop()

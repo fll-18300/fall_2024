@@ -18,21 +18,28 @@ def mission_one(r):
     # Authors: Kyle Mortimer 
     r.left_attachment_motor.run_time(150,500, then=Stop.HOLD, wait=False)    
     r.right_attachment_motor.run_time(-150 ,500, then=Stop.HOLD, wait=True)
-    r.gyro_drive_straight_distance(250,631)
+    r.gyro_drive_straight_distance(250,600)
     r.left_attachment_motor.run_time(-100,1000, then=Stop.HOLD, wait=False)    
     r.right_attachment_motor.run_time(100,1000, then=Stop.HOLD, wait=True)
-    r.gyro_tank_turn(196,-21 )
-    r.robot.drive
+    #r.gyro_tank_turn(196,-21 )
+    r.robot.drive(200,-250)
+    wait(1200)
+    r.robot.stop()
+    #r.robot.drive
     #drive back on an ark
     # Create and define distance, speed, and turn variables
     # to control how fast the robot moves, how sharp it turns, and how far it will go.
     # Reset the robot distance to zero
     speed = -350
-    turn = -15
-    distance = 501
+    turn = -20
+    distance = 539
     r.robot.reset()
-    r.left_attachment_motor.run_time(-100,1000, then=Stop.HOLD, wait=False)    
-    r.right_attachment_motor.run_time(100,1000, then=Stop.HOLD, wait=False)
+    r.left_attachment_motor.run_time(-200,1000, then=Stop.HOLD, wait=False)    
+    r.right_attachment_motor.run_time(200,1000, then=Stop.HOLD, wait=False)
+    wait(500)
+    r.robot.drive(-68,-10)
+    wait(2399)
+    r.robot.stop()
     # While the robot.distance() is less than or equal to the variable 'distance' stay in the while loop
     while (abs(r.robot.distance()) <= distance):
         r.robot.drive(speed,turn)
@@ -44,7 +51,7 @@ def mission_one(r):
     # to control how fast the robot moves, how sharp it turns, and how far it will go.
     # Reset the robot distance to zero
     speed = 350
-    turn = -90 
+    turn = -111 
     distance = 601
     r.robot.reset()
     r.left_attachment_motor.run_time(-100,1000, then=Stop.HOLD, wait=False)    
