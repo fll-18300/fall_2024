@@ -66,11 +66,16 @@ def mission_four(r):
     r.left_attachment_motor.run_time(1000,500, then=Stop.COAST, wait=False)
     #Friday stuff 
     r.robot.straight(-53)
-    r.gyro_tank_turn(502,-8)
+    r.gyro_tank_turn(502,-6)
     r.robot.straight(269)
     r.gyro_tank_turn(502,-4)
-    r.robot.straight(212)
+    r.robot.straight(182)
     r.gyro_tank_turn(501,-25)
+    r.robot.straight(21)
+    #Stuff added on wednesday 12/4
+    r.robot.straight(-252)
+    r.gyro_tank_turn(501,9)
+    r.robot.straight(500)
     #hehehe >:) 
 
     #Mission before adding the new wacky thang \/ 
