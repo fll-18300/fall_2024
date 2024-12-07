@@ -20,7 +20,7 @@ def mission_three(r):
     r.gyro_tank_turn(125,25)
     r.gyro_drive_straight_distance(225,293,50)
     #face the shipwerck
-    r.gyro_tank_turn(125,56) 
+    r.gyro_tank_turn(125,51) 
     #lower the bar
     r.left_attachment_motor.run_time(-100,2500, wait=False)    
     r.right_attachment_motor.run_time(100,2500, wait=True)
@@ -51,10 +51,10 @@ def mission_three(r):
     r.robot.drive(100,-35)
     wait(1500)
     r.robot.stop()
-    r.gyro_drive_straight_distance(-167,128)
+    r.gyro_drive_straight_distance(-167,68)
     r.left_attachment_motor.run_time(100,2500, then=Stop.HOLD, wait=False)    
     r.right_attachment_motor.run_time(-100,2500, then=Stop.HOLD, wait=True)
-    r.gyro_tank_turn(126,-70)
+    r.gyro_tank_turn(126,-63)
     #drive back to home
     r.gyro_drive_straight_distance(300,454)
     r.left_attachment_motor.stop()
