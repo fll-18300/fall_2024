@@ -45,8 +45,8 @@ def mission_three(r):
     r.left_attachment_motor.run_time(-150,3500, then=Stop.HOLD, wait=False)    
     r.right_attachment_motor.run_time(150,3500, then=Stop.HOLD, wait=False)
     #drive into shark ejection
-    r.gyro_drive_straight_distance(99,105)
-    r.gyro_drive_straight_distance(-99,271)
+    r.gyro_drive_straight_distance(99,125)
+    r.gyro_drive_straight_distance(-99,266)
     #turn twards the other coral thing
     r.robot.drive(100,-35)
     wait(1500)
